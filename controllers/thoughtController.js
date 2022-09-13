@@ -3,8 +3,8 @@ const { User, Thought } = require("../models");
 module.exports = {
     // getThoughts,
     getThoughts(req, res) {
-        Thought.find()
-            .then((users) => res.json(users))
+        Thought.find({})
+            .then((thought) => res.json(thought))
             .catch((err) => res.status(500).json(err));
     },
     // getSingleThought,
@@ -21,8 +21,24 @@ module.exports = {
     // createThought,
     createThought(req, res) {
         Thought.create(req.body)
-            .then((thought) => res.json(thought))
-            .catch((err) => res.status(500).json(err));
+            .then(({ _id }) => {
+                return User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    { $push: { thoughts: _id } },
+                    { new: true }
+                );
+            })
+            .then((thought) =>
+                !thought
+                    ? res.status(404).json({
+                        message: 'No User find with this ID!',
+                    })
+                    : res.json(thought)
+            )
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+            });
     },
     // updateThought,
     updateThought(req, res) {

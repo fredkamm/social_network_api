@@ -10,7 +10,7 @@ const {
     deleteReaction
 } = require('../../controllers/thoughtController');
 
-// api/thoughts GET all users and Create user
+// api/thoughts GET all thoughts and Create thoughts
 router.route('/').get(getThoughts).post(createThought);
 
 // api/user/:thoughtId Get user by id, Edit and Delete by user id
@@ -20,7 +20,7 @@ router.route('/:thoughtId')
     .delete(deleteThought)
 
 // /api/thought/:thoughtId/reactions/:reactionId Post and Delete a friend by ID
-router.route('/userId/friends/:friendsId')
+router.route('/:thoughtId/reactions/:reactionId')
     .post(addReaction)
     .delete(deleteReaction)
 
