@@ -20,7 +20,7 @@ router.route('/:userId')
     .delete(deleteUser)
 
 // /api/users/:userId/friends/:friendId Post and Delete a friend by ID
-router.route('/userId/friends/:friendsId')
+router.route('/:userId/friends/:friendsId')
     .post(addFriend)
     .delete(deleteFriend)
 

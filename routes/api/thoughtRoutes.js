@@ -14,7 +14,7 @@ const {
 router.route('/').get(getThoughts).post(createThought);
 
 // api/user/:thoughtId Get user by id, Edit and Delete by user id
-router.route('/:userId')
+router.route('/:thoughtId')
     .get(getSingleThought)
     .put(updateThought)
     .delete(deleteThought)
